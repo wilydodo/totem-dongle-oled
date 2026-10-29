@@ -4,14 +4,19 @@
  * SPDX-License-Identifier: MIT
  */
 
-#include "totem.dtsi"
-
-/* nice!nano에 존재하지 않는 xiao 핀 기반 kscan0 노드를 빌드 목록에서 강제 삭제 */
+/* nice_nano에 존재하지 않는 xiao_d 핀 레이블을 컴파일러가 인식할 수 있도록 임시 가짜 매핑 */
 / {
-    /delete-node/ kscan0; 
+    xiao_d: xiao_d_mock {
+        compatible = "zmk,kscan-mock";
+        columns = <0>;
+        rows = <0>;
+        events = <>;
+    };
 };
 
-/* 가짜(Mock) 스캔 매트릭스를 지정하여 하드웨어 핀 의존성 제거 */
+#include "totem.dtsi"
+
+/* 키맵이나 원본 설정에서 연결된 기존 kscan0을 무력화하고 가짜 스캔 매트릭스 주입 */
 / {
     chosen {
         zmk,kscan = &mock_kscan;
@@ -23,4 +28,10 @@
         rows = <0>;
         events = <>;
     };
+};
+
+/* 기존 kscan0 노드의 내용을 공백으로 오버라이드하여 핀 충돌 차단 */
+&kscan0 {
+    /delete-property/ col-gpios;
+    /delete-property/ row-gpios;
 };

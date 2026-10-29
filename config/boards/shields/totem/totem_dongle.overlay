@@ -32,6 +32,10 @@
 
 /* 기존 kscan0 노드의 내용을 공백으로 오버라이드하여 핀 충돌 차단 */
 &kscan0 {
+    compatible = "zmk,kscan-mock";
     /delete-property/ col-gpios;
     /delete-property/ row-gpios;
+    columns = <0>;
+    rows = <0>;
+    events = <>;
 };

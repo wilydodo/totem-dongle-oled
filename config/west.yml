@@ -1,28 +1,20 @@
-manifest:
-  remotes:
-    - name: zmkfirmware
-      url-base: https://github.com/zmkfirmware
-  projects:
-    - name: zmk
-      remote: zmkfirmware
-      revision: v0.3
-      import: app/west.yml
-  self:
-    path: config
 
 manifest:
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
-    - name: englmaxi
-      url-base: https://github.com/englmaxi
+    - name: wilydodo
+      url-base: https://github.com/wilydodo
+
   projects:
     - name: zmk
       remote: zmkfirmware
       revision: main
       import: app/west.yml
+
     - name: zmk-dongle-display
       remote: wilydodo
-      revision: main # use 'v0.3' instead of 'main' if you use have pinned zmk to 'v0.3' or below
+      revision: main
+
   self:
     path: config

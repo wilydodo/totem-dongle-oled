@@ -17,3 +17,8 @@ include:
     shield: settings_reset
   - board: nice_nano
     shield: settings_reset
+
+- name: Inspect battery configuration
+  run: |
+    find build -path '*/zephyr/.config' -print
+    grep -nEi 'BATTERY|ADC|VBAT' build/zephyr/.config || true
